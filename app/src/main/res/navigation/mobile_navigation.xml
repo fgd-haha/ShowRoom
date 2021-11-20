@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_status">
+
+    <fragment
+        android:id="@+id/navigation_status"
+        android:name="fgd.showroom.ui.status.StatusFragment"
+        android:label="状态监控"
+        tools:layout="@layout/fragment_status" />
+
+    <fragment
+        android:id="@+id/navigation_guide"
+        android:name="fgd.showroom.ui.guide.GuideFragment"
+        android:label="游览模式"
+        tools:layout="@layout/fragment_guide" />
+
+    <fragment
+        android:id="@+id/navigation_debug"
+        android:name="fgd.showroom.ui.debug.DebugFragment"
+        android:label="调试模式"
+        tools:layout="@layout/fragment_debug" />
+
+    <fragment
+        android:id="@+id/navigation_setting"
+        android:name="fgd.showroom.ui.setting.SettingFragment"
+        android:label="步骤设置"
+        tools:layout="@layout/fragment_setting" />
+</navigation>
