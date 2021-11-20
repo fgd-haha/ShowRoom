@@ -5,6 +5,7 @@ import android.view.Gravity
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatTextView
+import androidx.core.widget.TextViewCompat
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -43,7 +44,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun createCustomTitleTextView(): AppCompatTextView {
         val mTitleTextView = AppCompatTextView(this)
-//        TextViewCompat.setTextAppearance(mTitleTextView, null);
+        TextViewCompat.setTextAppearance(mTitleTextView, R.style.actionBarText);
 
         val layoutParams = ActionBar.LayoutParams(
             ActionBar.LayoutParams.WRAP_CONTENT,
