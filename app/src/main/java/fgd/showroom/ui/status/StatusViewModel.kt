@@ -9,5 +9,6 @@ class StatusViewModel : ViewModel() {
     private val _text = MutableLiveData<String>().apply {
         value = "This is status Fragment"
     }
-    val text: LiveData<String> = _text
+    var switch = true
+    var text: LiveData<String> = _text
 }

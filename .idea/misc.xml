@@ -7,14 +7,18 @@
         <entry key="..\:/code/external/ShowRoom/app/src/main/res/layout/fragment_dashboard.xml" value="0.1480978260869565" />
         <entry key="..\:/code/external/ShowRoom/app/src/main/res/layout/fragment_home.xml" value="0.1480978260869565" />
         <entry key="..\:/code/external/ShowRoom/app/src/main/res/layout/fragment_notifications.xml" value="0.1480978260869565" />
+        <entry key="..\:/code/external/ShowroomApp/ShowRoom/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.21484375" />
+        <entry key="..\:/code/external/ShowroomApp/ShowRoom/app/src/main/res/drawable/ic_baseline_alt_route_24.xml" value="0.3984375" />
         <entry key="..\:/code/external/ShowroomApp/ShowRoom/app/src/main/res/drawable/ic_baseline_settings_24.xml" value="0.17125" />
+        <entry key="..\:/code/external/ShowroomApp/ShowRoom/app/src/main/res/drawable/ic_button_161555.xml" value="0.21484375" />
+        <entry key="..\:/code/external/ShowroomApp/ShowRoom/app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.3984375" />
         <entry key="..\:/code/external/ShowroomApp/ShowRoom/app/src/main/res/drawable/ic_notifications_black_24dp.xml" value="0.2109375" />
         <entry key="..\:/code/external/ShowroomApp/ShowRoom/app/src/main/res/layout/abs_layout.xml" value="0.18671875" />
-        <entry key="..\:/code/external/ShowroomApp/ShowRoom/app/src/main/res/layout/activity_main.xml" value="0.12447916666666667" />
+        <entry key="..\:/code/external/ShowroomApp/ShowRoom/app/src/main/res/layout/activity_main.xml" value="0.37421875" />
         <entry key="..\:/code/external/ShowroomApp/ShowRoom/app/src/main/res/layout/fragment_debug.xml" value="0.12447916666666667" />
         <entry key="..\:/code/external/ShowroomApp/ShowRoom/app/src/main/res/layout/fragment_guide.xml" value="0.12447916666666667" />
         <entry key="..\:/code/external/ShowroomApp/ShowRoom/app/src/main/res/layout/fragment_setting.xml" value="0.12447916666666667" />
-        <entry key="..\:/code/external/ShowroomApp/ShowRoom/app/src/main/res/layout/fragment_status.xml" value="0.12447916666666667" />
+        <entry key="..\:/code/external/ShowroomApp/ShowRoom/app/src/main/res/layout/fragment_status.xml" value="0.6" />
         <entry key="..\:/code/external/ShowroomApp/ShowRoom/app/src/main/res/menu/bottom_nav_menu.xml" value="0.8" />
       </map>
     </option>

@@ -6,17 +6,253 @@
     android:layout_height="match_parent"
     tools:context=".ui.status.StatusFragment">
 
-    <TextView
-        android:id="@+id/text_home"
-        android:layout_width="match_parent"
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_h_top"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.2" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_h_down"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.7004992" />
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_v_mid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
+
+    <Button
+        android:id="@+id/button_main_open"
+        style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="总开机"
+        app:icon="@drawable/ic_baseline_alt_route_24"
+        app:layout_constraintBottom_toTopOf="@+id/guideline_h_top"
+        app:layout_constraintEnd_toStartOf="@+id/button_main_close"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button_main_close"
+        style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="总关机"
+        app:icon="@drawable/ic_baseline_alt_route_24"
+        app:layout_constraintBottom_toTopOf="@+id/guideline_h_top"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_v_mid"
+        app:layout_constraintStart_toEndOf="@+id/button_main_open"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button_restoration"
+        style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="复位"
+        app:icon="@drawable/ic_baseline_alt_route_24"
+        app:layout_constraintBottom_toTopOf="@+id/guideline_h_top"
+        app:layout_constraintEnd_toStartOf="@+id/button_emergency"
+        app:layout_constraintStart_toStartOf="@+id/guideline_v_mid"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button_emergency"
+        style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="应急模式"
+        app:icon="@drawable/ic_baseline_alt_route_24"
+        app:layout_constraintBottom_toTopOf="@+id/guideline_h_top"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/button_restoration"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <Button
+        android:id="@+id/button_open_1st_door"
+        style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="一楼开门"
+        app:icon="@drawable/ic_baseline_alt_route_24"
+        app:layout_constraintBottom_toTopOf="@+id/button_open_1st_light"
+        app:layout_constraintEnd_toStartOf="@+id/button_close_1st_door"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline_h_down" />
+
+    <Button
+        android:id="@+id/button_close_1st_door"
+        style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="一楼关门"
+        app:icon="@drawable/ic_baseline_alt_route_24"
+        app:layout_constraintBottom_toTopOf="@+id/button_close_1st_light"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_v_mid"
+        app:layout_constraintStart_toEndOf="@+id/button_open_1st_door"
+        app:layout_constraintTop_toTopOf="@+id/guideline_h_down" />
+
+    <Button
+        android:id="@+id/button_open_2st_door"
+        style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="二楼开门"
+        app:icon="@drawable/ic_baseline_alt_route_24"
+        app:layout_constraintBottom_toTopOf="@+id/button_open_2st_light"
+        app:layout_constraintEnd_toStartOf="@+id/button_close_2st_door"
+
+        app:layout_constraintStart_toStartOf="@+id/guideline_v_mid"
+        app:layout_constraintTop_toTopOf="@+id/guideline_h_down" />
+
+    <Button
+        android:id="@+id/button_close_2st_door"
+        style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="二楼关门"
+        app:icon="@drawable/ic_baseline_alt_route_24"
+        app:layout_constraintBottom_toTopOf="@+id/button_close_2st_light"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/button_open_2st_door"
+        app:layout_constraintTop_toTopOf="@+id/guideline_h_down" />
+
+
+    <Button
+        android:id="@+id/button_open_1st_light"
+        style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="一楼开灯"
+        app:icon="@drawable/ic_baseline_alt_route_24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/button_close_1st_light"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_open_1st_door" />
+
+    <Button
+        android:id="@+id/button_close_1st_light"
+        style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="一楼关灯"
+        app:icon="@drawable/ic_baseline_alt_route_24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_v_mid"
+        app:layout_constraintStart_toEndOf="@+id/button_open_1st_light"
+        app:layout_constraintTop_toBottomOf="@+id/button_close_1st_door" />
+
+    <Button
+        android:id="@+id/button_open_2st_light"
+        style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="二楼开灯"
+        app:icon="@drawable/ic_baseline_alt_route_24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/button_close_2st_light"
+        app:layout_constraintStart_toStartOf="@+id/guideline_v_mid"
+        app:layout_constraintTop_toBottomOf="@+id/button_open_2st_door" />
+
+    <Button
+        android:id="@+id/button_close_2st_light"
+        style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="二楼关灯"
+        app:icon="@drawable/ic_baseline_alt_route_24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/button_open_2st_light"
+        app:layout_constraintTop_toBottomOf="@+id/button_close_2st_door" />
+
+    <TextView
+        android:id="@+id/text_control"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:text="应用中控"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/text_server"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_v_mid"
+        app:layout_constraintTop_toTopOf="@+id/guideline_h_top" />
+
+
+    <ImageButton
+        android:id="@+id/btn_control"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:background="@android:color/transparent"
+        android:scaleType="centerInside"
+        android:src="@drawable/icon_yellow_72_45"
+        app:layout_constraintBottom_toTopOf="@+id/btn_server"
+        app:layout_constraintStart_toStartOf="@+id/guideline_v_mid"
+        app:layout_constraintTop_toTopOf="@+id/guideline_h_top" />
+
+    <TextView
+        android:id="@+id/text_server"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:text="服务器"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/text_computer"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_v_mid"
+        app:layout_constraintTop_toBottomOf="@+id/text_control" />
+
+    <ImageButton
+        android:id="@+id/btn_server"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:background="@android:color/transparent"
+        android:scaleType="centerInside"
+        android:src="@drawable/icon_yellow_72_45"
+        app:layout_constraintBottom_toTopOf="@+id/btn_computer"
+        app:layout_constraintStart_toStartOf="@+id/guideline_v_mid"
+        app:layout_constraintTop_toBottomOf="@+id/btn_control" />
+
+    <TextView
+        android:id="@+id/text_computer"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:text="电脑"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/guideline_h_down"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_v_mid"
+        app:layout_constraintTop_toBottomOf="@+id/text_server" />
+
+    <ImageButton
+        android:id="@+id/btn_computer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:background="@android:color/transparent"
+        android:scaleType="centerInside"
+        android:src="@drawable/icon_yellow_72_45"
+        app:layout_constraintBottom_toTopOf="@+id/guideline_h_down"
+        app:layout_constraintStart_toStartOf="@+id/guideline_v_mid"
+        app:layout_constraintTop_toBottomOf="@+id/btn_server" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
