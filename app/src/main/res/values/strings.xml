@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">EleController</string>
+    <string name="app_name">ShowRoom</string>
     <string name="title_status">状态</string>
     <string name="title_guide">导览</string>
     <string name="title_debug">调试</string>

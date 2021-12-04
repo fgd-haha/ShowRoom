@@ -42,6 +42,17 @@ class DebugFragment : Fragment() {
         activity?.title = "调试模式"
     }
 
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

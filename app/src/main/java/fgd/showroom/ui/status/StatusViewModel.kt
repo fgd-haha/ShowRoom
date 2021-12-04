@@ -1,14 +1,36 @@
 package fgd.showroom.ui.status
 
-import androidx.lifecycle.LiveData
+import android.os.SystemClock.sleep
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
+import fgd.showroom.logic.Repository
 
 class StatusViewModel : ViewModel() {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is status Fragment"
+    private val actionLiveData = MutableLiveData<String>()
+    private val monitor = MutableLiveData<String>()
+
+    var isConnected = Transformations.switchMap(monitor) { _ ->
+        Repository.isConnected()
     }
-    var switch = true
-    var text: LiveData<String> = _text
+
+    val commonResponse = Transformations.switchMap(actionLiveData) { action ->
+        Repository.svsMmcRequest(action)
+    }
+
+    fun svsMmcRequest(action: String) {
+        actionLiveData.value = action
+    }
+
+    fun saveUrl(Url: String) = Repository.saveUrl(Url)
+
+    fun getSavedUrl() = Repository.getSavedUrl()
+
+    suspend fun monitorServiceStatus() {
+        while (true) {
+            sleep(500)
+            monitor.postValue("start")
+        }
+    }
 }
