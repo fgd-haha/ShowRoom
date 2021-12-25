@@ -1,14 +1,20 @@
 package fgd.showroom.logic.dao
 
 import android.content.Context
+import android.util.Patterns
 import androidx.core.content.edit
 import fgd.showroom.ShowRoomApplication
 
 object ServerUrlDao {
 
-    fun saveUrl(url: String) {
-        sharedPreferences().edit {
-            putString("server_url", url)
+    fun saveUrl(url: String): Boolean {
+        return if (Patterns.WEB_URL.matcher(url).matches()) {
+            sharedPreferences().edit {
+                putString("server_url", url)
+            }
+            true
+        } else {
+            false
         }
     }
 

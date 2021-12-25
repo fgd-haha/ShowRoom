@@ -1,5 +1,6 @@
 package fgd.showroom.ui.status
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,6 +15,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import fgd.showroom.R
 import fgd.showroom.databinding.FragmentStatusBinding
 import fgd.showroom.databinding.TextInputServerSettingBinding
+import fgd.showroom.ui.status.computers.ComputersActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -40,7 +42,48 @@ class StatusFragment : Fragment() {
         _sbinding = TextInputServerSettingBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-//        点击上面与下面按键发送请求
+//      总开机 总关机 复位 应急模式 开关灯 开关门
+//      注册点击请求
+        registeClickEvents()
+//      展示按键返回消息
+        observeRpInfo()
+
+//      点击服务图片，注册(编辑url)事件
+        urlDialog()
+
+//      轮询监听服务url是否已连接
+        serverIsConnected()
+
+//      点击电脑按钮，查看状态详情
+        binding.btnComputer.setOnClickListener {
+            val intent = Intent(requireContext(), ComputersActivity::class.java)
+            this.startActivity(intent)
+        }
+
+        return root
+    }
+
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+    }
+
+    override fun onStart() {
+        super.onStart()
+        activity?.title = "状态监控"
+    }
+
+    override fun onResume() {
+        super.onResume()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+        _sbinding = null
+    }
+
+    private fun registeClickEvents() {
         binding.btnPowerOn.setOnClickListener { statusViewModel.svsMmcRequest("poweron") }
         binding.btnPowerOff.setOnClickListener { statusViewModel.svsMmcRequest("poweroff") }
         binding.btnReset.setOnClickListener { statusViewModel.svsMmcRequest("reset") }
@@ -53,7 +96,10 @@ class StatusFragment : Fragment() {
         binding.btnSecondLightOn.setOnClickListener { statusViewModel.svsMmcRequest("alllighton") }
         binding.btnFirstLightOff.setOnClickListener { statusViewModel.svsMmcRequest("alllightoff") }
         binding.btnSecondLightOff.setOnClickListener { statusViewModel.svsMmcRequest("alllightoff") }
-//       展示按键返回消息
+    }
+
+
+    private fun observeRpInfo() {
         statusViewModel.commonResponse.observe(viewLifecycleOwner, { result ->
             Toast.makeText(
                 activity,
@@ -61,16 +107,30 @@ class StatusFragment : Fragment() {
                 Toast.LENGTH_SHORT
             ).show()
         })
+    }
+
+    fun saveUrl() {
+        val inputText = sbinding.textInputSeverSetting.editText?.text.toString()
+        val saved = statusViewModel.saveUrl(inputText)
+        if (!saved) {
+            Toast.makeText(
+                activity,
+                "不合法url地址，请检查",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+    }
 
 
-//        点击服务图片，弹出dialog输入url
+    private fun urlDialog() {
+        //      点击服务图片，弹出dialog输入url
         val dialog = MaterialAlertDialogBuilder(requireActivity())
             .setView(sbinding.root)
             .setNeutralButton("取消") { _, _ -> }
             .setPositiveButton("保存") { _, _ -> saveUrl() }
             .create()
         binding.btnServer.setOnClickListener { dialog.show() }
-//        输入框绑定回车按键，等同于"保存"
+        //        输入框绑定回车按键，等同于"保存"
         sbinding.textInputSeverSetting.editText?.setText(statusViewModel.getSavedUrl())
         sbinding.textInputSeverSetting.editText?.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
@@ -78,6 +138,13 @@ class StatusFragment : Fragment() {
                 dialog.hide()
                 true
             } else false
+        }
+    }
+
+
+    private fun serverIsConnected() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            withContext(Dispatchers.Default) { statusViewModel.monitorServiceStatus() }
         }
         statusViewModel.isConnected.observe(viewLifecycleOwner, { result ->
             if (result.isSuccess) {
@@ -95,33 +162,21 @@ class StatusFragment : Fragment() {
             }
         })
 
-        return root
+        statusViewModel.computersStatus.observe(viewLifecycleOwner, { result ->
+            val computerList = result.getOrNull() ?: listOf()
+            var hasOnline = false
+            var hasOffline = false
+            computerList.forEach { if (it.state == 1) hasOnline = true else hasOffline = true }
+            var img = R.drawable.icon_red_72_45
+            if (hasOnline) {
+                if (hasOffline)
+                    img = R.drawable.icon_yellow_72_45
+                else if (!hasOffline) {
+                    img = R.drawable.icon_green_72_45
+                }
+            }
+            binding.btnComputer.setImageDrawable(ContextCompat.getDrawable(requireContext(), img))
+        })
+
     }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        viewLifecycleOwner.lifecycleScope.launch {
-            withContext(Dispatchers.Default) { statusViewModel.monitorServiceStatus() }
-        }
-    }
-
-    override fun onStart() {
-        super.onStart()
-        activity?.title = "状态监控"
-
-
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-        _sbinding = null
-    }
-
-    fun saveUrl() {
-        val inputText = sbinding.textInputSeverSetting.editText?.text.toString()
-        statusViewModel.saveUrl(inputText)
-    }
-
-//    todo 电脑页面
 }

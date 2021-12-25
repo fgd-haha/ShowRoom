@@ -1,6 +1,6 @@
 package fgd.showroom.ui.status
 
-import android.os.SystemClock.sleep
+import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
@@ -9,9 +9,9 @@ import fgd.showroom.logic.Repository
 class StatusViewModel : ViewModel() {
 
     private val actionLiveData = MutableLiveData<String>()
-    private val monitor = MutableLiveData<String>()
+    private val monitor = MediatorLiveData<String>()
 
-    var isConnected = Transformations.switchMap(monitor) { _ ->
+    var isConnected = Transformations.switchMap(monitor) {
         Repository.isConnected()
     }
 
@@ -19,18 +19,17 @@ class StatusViewModel : ViewModel() {
         Repository.svsMmcRequest(action)
     }
 
+    var computersStatus = Transformations.switchMap(monitor) {
+        Repository.listTypeState(devtype = "10")
+    }
+
     fun svsMmcRequest(action: String) {
         actionLiveData.value = action
     }
 
-    fun saveUrl(Url: String) = Repository.saveUrl(Url)
+    fun saveUrl(Url: String): Boolean = Repository.saveUrl(Url)
 
     fun getSavedUrl() = Repository.getSavedUrl()
 
-    suspend fun monitorServiceStatus() {
-        while (true) {
-            sleep(500)
-            monitor.postValue("start")
-        }
-    }
+    fun monitorServiceStatus() = monitor.postValue("start ${System.currentTimeMillis()}")
 }

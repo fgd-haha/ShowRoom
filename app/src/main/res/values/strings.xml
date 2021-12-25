@@ -1,7 +1,10 @@
 <resources>
     <string name="app_name">ShowRoom</string>
+    <string name="computer_activity_name">计算机状态</string>
     <string name="title_status">状态</string>
     <string name="title_guide">导览</string>
     <string name="title_debug">调试</string>
     <string name="title_setting">设置</string>
+    <string name="btn_computer_power_off">全部关机</string>
+    <string name="btn_computer_power_on">全部开机</string>
 </resources>

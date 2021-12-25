@@ -15,8 +15,6 @@ class DebugFragment : Fragment() {
     private lateinit var notificationsViewModel: DebugViewModel
     private var _binding: FragmentDebugBinding? = null
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
 
     override fun onCreateView(

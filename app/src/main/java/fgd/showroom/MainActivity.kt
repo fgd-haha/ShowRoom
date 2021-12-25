@@ -1,11 +1,8 @@
 package fgd.showroom
 
 import android.os.Bundle
-import android.view.Gravity
-import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.AppCompatTextView
-import androidx.core.widget.TextViewCompat
+import androidx.appcompat.widget.Toolbar
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -13,23 +10,25 @@ import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import fgd.showroom.databinding.ActivityMainBinding
 
+
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private lateinit var customTitle: AppCompatTextView
+    private lateinit var toolBar: Toolbar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        customTitle = createCustomTitleTextView()
+        toolBar = binding.toolbarMain
+        setSupportActionBar(toolBar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
 
         val navView: BottomNavigationView = binding.navView
 
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
         val appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.navigation_status,
@@ -42,26 +41,11 @@ class MainActivity : AppCompatActivity() {
         navView.setupWithNavController(navController)
     }
 
-    private fun createCustomTitleTextView(): AppCompatTextView {
-        val mTitleTextView = AppCompatTextView(this)
-        TextViewCompat.setTextAppearance(mTitleTextView, R.style.actionBarText);
-
-        val layoutParams = ActionBar.LayoutParams(
-            ActionBar.LayoutParams.WRAP_CONTENT,
-            ActionBar.LayoutParams.WRAP_CONTENT
-        )
-        layoutParams.gravity = Gravity.CENTER
-        supportActionBar?.setCustomView(mTitleTextView, layoutParams)
-        supportActionBar?.displayOptions = ActionBar.DISPLAY_SHOW_CUSTOM
-
-        return mTitleTextView
-    }
-
     override fun setTitle(title: CharSequence?) {
-        customTitle.text = title
+        toolBar.title = title
     }
 
     override fun setTitle(titleId: Int) {
-        customTitle.text = getString(titleId)
+        toolBar.title = getString(titleId)
     }
 }
