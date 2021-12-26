@@ -25,20 +25,20 @@
 
             <!--            todo 开关灯-->
             <Button
-                android:id="@+id/btn_computer_power_off"
+                android:id="@+id/btn_all_light_off"
                 android:layout_width="wrap_content"
                 android:layout_height="?attr/actionBarSize"
                 android:layout_gravity="right"
-                android:text="@string/btn_computer_power_off"
+                android:text="@string/btn_all_light_off"
                 app:icon="@drawable/ic_baseline_alt_route_24"
                 tools:ignore="RtlHardcoded" />
 
             <Button
-                android:id="@+id/btn_computer_power_on"
+                android:id="@+id/btn_all_light_on"
                 android:layout_width="wrap_content"
                 android:layout_height="?attr/actionBarSize"
                 android:layout_gravity="right"
-                android:text="@string/btn_computer_power_on"
+                android:text="@string/btn_all_light_on"
                 app:icon="@drawable/ic_baseline_alt_route_24"
                 tools:ignore="RtlHardcoded" />
 

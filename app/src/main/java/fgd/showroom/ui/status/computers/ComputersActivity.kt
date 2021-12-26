@@ -5,7 +5,6 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.ViewTreeObserver.OnGlobalLayoutListener
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NavUtils
 import androidx.lifecycle.ViewModelProvider
@@ -13,6 +12,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import fgd.showroom.R
 import fgd.showroom.databinding.ActivityComputersBinding
 import fgd.showroom.logic.model.DevStatus
+import fgd.showroom.ui.observeCommonRpInfo
 import kotlin.math.floor
 
 
@@ -33,7 +33,7 @@ class ComputersActivity : AppCompatActivity() {
 
         binding.btnComputerPowerOn.setOnClickListener { viewModel.powerAllRequest() }
         binding.btnComputerPowerOff.setOnClickListener { viewModel.shutAllRequest() }
-        observeRpInfo()
+        observeCommonRpInfo(this, this, viewModel.actionResult)
 
         val layoutManager = GridLayoutManager(this, 1)
         binding.computerRecyclerView.layoutManager = layoutManager
@@ -68,15 +68,5 @@ class ComputersActivity : AppCompatActivity() {
             }
             else -> super.onOptionsItemSelected(item)
         }
-    }
-
-    private fun observeRpInfo() {
-        viewModel.actionResult.observe(this, { result ->
-            Toast.makeText(
-                this,
-                result.getOrElse { result.exceptionOrNull().toString() },
-                Toast.LENGTH_SHORT
-            ).show()
-        })
     }
 }

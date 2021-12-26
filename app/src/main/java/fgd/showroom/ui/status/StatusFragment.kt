@@ -15,6 +15,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import fgd.showroom.R
 import fgd.showroom.databinding.FragmentStatusBinding
 import fgd.showroom.databinding.TextInputServerSettingBinding
+import fgd.showroom.ui.observeCommonRpInfo
 import fgd.showroom.ui.status.computers.ComputersActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -45,8 +46,7 @@ class StatusFragment : Fragment() {
 //      总开机 总关机 复位 应急模式 开关灯 开关门
 //      注册点击请求
         registeClickEvents()
-//      展示按键返回消息
-        observeRpInfo()
+//
 
 //      点击服务图片，注册(编辑url)事件
         urlDialog()
@@ -63,18 +63,15 @@ class StatusFragment : Fragment() {
         return root
     }
 
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+//        展示按键返回消息
+        observeCommonRpInfo(requireActivity(), requireActivity(), statusViewModel.commonResponse)
     }
 
     override fun onStart() {
         super.onStart()
         activity?.title = "状态监控"
-    }
-
-    override fun onResume() {
-        super.onResume()
     }
 
     override fun onDestroyView() {
@@ -96,17 +93,6 @@ class StatusFragment : Fragment() {
         binding.btnSecondLightOn.setOnClickListener { statusViewModel.svsMmcRequest("alllighton") }
         binding.btnFirstLightOff.setOnClickListener { statusViewModel.svsMmcRequest("alllightoff") }
         binding.btnSecondLightOff.setOnClickListener { statusViewModel.svsMmcRequest("alllightoff") }
-    }
-
-
-    private fun observeRpInfo() {
-        statusViewModel.commonResponse.observe(viewLifecycleOwner, { result ->
-            Toast.makeText(
-                activity,
-                result.getOrElse { result.exceptionOrNull().toString() },
-                Toast.LENGTH_SHORT
-            ).show()
-        })
     }
 
     fun saveUrl() {
