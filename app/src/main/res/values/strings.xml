@@ -9,4 +9,8 @@
     <string name="btn_computer_power_on">全部开机</string>
     <string name="btn_all_light_on">全部开灯</string>
     <string name="btn_all_light_off">全部关灯</string>
+    <string name="option_1"><font size="30">动作</font></string>
+    <string name="option_2">全部关灯</string>
+    <string name="option_3">全部关灯</string>
+
 </resources>
