@@ -3,6 +3,7 @@ package fgd.showroom.logic
 import android.util.Log
 import androidx.lifecycle.liveData
 import fgd.showroom.logic.dao.ServerUrlDao
+import fgd.showroom.logic.model.*
 import fgd.showroom.logic.network.ShowRoomNetwork
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -45,9 +46,38 @@ object Repository {
         }
     }
 
+    fun execute(action: Int, devtype: Int, devno: Int, intv: Int, filename: String) = fire(Dispatchers.IO) {
+        val commonResponse = ShowRoomNetwork.execute(action, devtype, devno, intv, filename)
+        if (commonResponse.success == 1) {
+            Result.success("执行成功")
+        } else {
+            Result.failure(RuntimeException("执行失败"))
+        }
+    }
+
     fun saveUrl(Url: String): Boolean = ServerUrlDao.saveUrl(Url)
 
     fun getSavedUrl() = ServerUrlDao.getSavedUrl()
+
+    suspend fun getActionList(): MutableList<Action> = list { ShowRoomNetwork.getActionList().toMutableList() }
+
+    suspend fun getDevList(): MutableList<Device> = list { ShowRoomNetwork.getDevList().toMutableList() }
+
+    suspend fun getDevTypeList(): MutableList<DevType> = list { ShowRoomNetwork.getDevTypeList().toMutableList() }
+
+    suspend fun getStepList(): MutableList<Step> = list { ShowRoomNetwork.getStepList().toMutableList() }
+
+    suspend fun getFileList(): MutableList<PlayFile> = list { ShowRoomNetwork.getFileList().toMutableList() }
+
+    fun getStepAction(step: Int) = fire(Dispatchers.IO) { Result.success(ShowRoomNetwork.getStepAction(step)) }
+
+    private suspend fun <T> list(block: suspend () -> MutableList<T>): MutableList<T> {
+        return try {
+            block()
+        } catch (e: Exception) {
+            mutableListOf()
+        }
+    }
 
     private fun <T> fire(context: CoroutineContext, block: suspend () -> Result<T>) =
         liveData<Result<T>>(context) {
@@ -61,7 +91,7 @@ object Repository {
         }
 
     private fun <T> loop(context: CoroutineContext, block: suspend () -> Result<T>) =
-        liveData<Result<T>>(context) {
+        liveData(context) {
             while (true) {
                 val result = try {
                     block()

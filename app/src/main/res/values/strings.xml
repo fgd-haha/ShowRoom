@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ShowRoom</string>
+    <string name="app_name">展厅控制</string>
     <string name="computer_activity_name">计算机状态</string>
     <string name="title_status">状态</string>
     <string name="title_guide">导览</string>
@@ -9,8 +9,11 @@
     <string name="btn_computer_power_on">全部开机</string>
     <string name="btn_all_light_on">全部开灯</string>
     <string name="btn_all_light_off">全部关灯</string>
-    <string name="option_1"><font size="30">动作</font></string>
-    <string name="option_2">全部关灯</string>
-    <string name="option_3">全部关灯</string>
+    <string name="debug_menu_action">执行动作</string>
+    <string name="debug_menu_device_classify">设备分类</string>
+    <string name="debug_menu_device_no">设备编号</string>
+    <string name="debug_filename">文件名称</string>
+    <string name="debug_brightness">亮度</string>
+    <string name="debug_execute">执行</string>
 
 </resources>

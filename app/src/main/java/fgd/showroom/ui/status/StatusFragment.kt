@@ -85,14 +85,6 @@ class StatusFragment : Fragment() {
         binding.btnPowerOff.setOnClickListener { statusViewModel.svsMmcRequest("poweroff") }
         binding.btnReset.setOnClickListener { statusViewModel.svsMmcRequest("reset") }
         binding.btnEmergence.setOnClickListener { statusViewModel.svsMmcRequest("emergence") }
-        binding.btnOpenFirstFloorDoor.setOnClickListener { statusViewModel.svsMmcRequest("opendoor") }
-        binding.btnOpenSecondFloorDoor.setOnClickListener { statusViewModel.svsMmcRequest("opendoor") }
-        binding.btnCloseFirstFloorDoor.setOnClickListener { statusViewModel.svsMmcRequest("closedoor") }
-        binding.btnCloseSecondFloorDoor.setOnClickListener { statusViewModel.svsMmcRequest("closedoor") }
-        binding.btnFirstLightOn.setOnClickListener { statusViewModel.svsMmcRequest("alllighton") }
-        binding.btnSecondLightOn.setOnClickListener { statusViewModel.svsMmcRequest("alllighton") }
-        binding.btnFirstLightOff.setOnClickListener { statusViewModel.svsMmcRequest("alllightoff") }
-        binding.btnSecondLightOff.setOnClickListener { statusViewModel.svsMmcRequest("alllightoff") }
     }
 
     fun saveUrl() {

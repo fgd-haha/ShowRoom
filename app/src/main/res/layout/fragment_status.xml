@@ -18,7 +18,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.7004992" />
+        app:layout_constraintGuide_percent="0.9" />
 
 
     <androidx.constraintlayout.widget.Guideline
@@ -77,106 +77,6 @@
         app:layout_constraintStart_toEndOf="@+id/btn_reset"
         app:layout_constraintTop_toTopOf="parent" />
 
-
-    <Button
-        android:id="@+id/btn_open_first_floor_door"
-        style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="一楼开门"
-        app:icon="@drawable/ic_baseline_alt_route_24"
-        app:layout_constraintBottom_toTopOf="@+id/btn_first_light_on"
-        app:layout_constraintEnd_toStartOf="@+id/btn_close_first_floor_door"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline_h_down" />
-
-    <Button
-        android:id="@+id/btn_close_first_floor_door"
-        style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="一楼关门"
-        app:icon="@drawable/ic_baseline_alt_route_24"
-        app:layout_constraintBottom_toTopOf="@+id/btn_first_light_off"
-        app:layout_constraintEnd_toStartOf="@+id/guideline_v_mid"
-        app:layout_constraintStart_toEndOf="@+id/btn_open_first_floor_door"
-        app:layout_constraintTop_toTopOf="@+id/guideline_h_down" />
-
-    <Button
-        android:id="@+id/btn_open_second_floor_door"
-        style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="二楼开门"
-        app:icon="@drawable/ic_baseline_alt_route_24"
-        app:layout_constraintBottom_toTopOf="@+id/btn_second_light_on"
-        app:layout_constraintEnd_toStartOf="@+id/btn_close_second_floor_door"
-
-        app:layout_constraintStart_toStartOf="@+id/guideline_v_mid"
-        app:layout_constraintTop_toTopOf="@+id/guideline_h_down" />
-
-    <Button
-        android:id="@+id/btn_close_second_floor_door"
-        style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="二楼关门"
-        app:icon="@drawable/ic_baseline_alt_route_24"
-        app:layout_constraintBottom_toTopOf="@+id/btn_second_light_off"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/btn_open_second_floor_door"
-        app:layout_constraintTop_toTopOf="@+id/guideline_h_down" />
-
-
-    <Button
-        android:id="@+id/btn_first_light_on"
-        style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="一楼开灯"
-        app:icon="@drawable/ic_baseline_alt_route_24"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btn_first_light_off"
-
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_open_first_floor_door" />
-
-    <Button
-        android:id="@+id/btn_first_light_off"
-        style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="一楼关灯"
-        app:icon="@drawable/ic_baseline_alt_route_24"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/guideline_v_mid"
-        app:layout_constraintStart_toEndOf="@+id/btn_first_light_on"
-        app:layout_constraintTop_toBottomOf="@+id/btn_close_first_floor_door" />
-
-    <Button
-        android:id="@+id/btn_second_light_on"
-        style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="二楼开灯"
-        app:icon="@drawable/ic_baseline_alt_route_24"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btn_second_light_off"
-        app:layout_constraintStart_toStartOf="@+id/guideline_v_mid"
-        app:layout_constraintTop_toBottomOf="@+id/btn_open_second_floor_door" />
-
-    <Button
-        android:id="@+id/btn_second_light_off"
-        style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="二楼关灯"
-        app:icon="@drawable/ic_baseline_alt_route_24"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/btn_second_light_on"
-        app:layout_constraintTop_toBottomOf="@+id/btn_close_second_floor_door" />
 
     <TextView
         android:id="@+id/text_control"

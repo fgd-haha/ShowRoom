@@ -23,7 +23,6 @@
             app:popupTheme="@style/Theme.ShowRoom.PopupOverlay"
             android:theme="@style/ToolbarStyle">
 
-            <!--            todo 开关灯-->
             <Button
                 android:id="@+id/btn_all_light_off"
                 android:layout_width="wrap_content"

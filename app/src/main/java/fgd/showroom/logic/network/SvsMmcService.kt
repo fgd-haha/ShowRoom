@@ -17,12 +17,6 @@ interface SvsMmcService {
     @GET("{action}")
     fun svsMmcRequest(@Path("action") action: String, @Query("type") type: Int): Call<CommonResponse>
 
-    @GET("powerall")
-    fun powerAllRequest(@Query("type") type: Int): Call<CommonResponse>
-
-    @GET("shutall")
-    fun shutAllRequest(@Query("type") type: Int): Call<CommonResponse>
-
     @GET("listtypestate")
     fun listTypeState(@Query("devtype") devtype: String): Call<List<DevStatus>>
 

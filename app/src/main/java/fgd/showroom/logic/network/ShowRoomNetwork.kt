@@ -21,8 +21,20 @@ object ShowRoomNetwork {
         else ServiceCreator.create(SvsMmcService::class.java).svsMmcRequest(action, type).await()
     }
 
-    suspend fun powerAllRequest(type: Int) = ServiceCreator.create(SvsMmcService::class.java).powerAllRequest(type).await()
-    suspend fun shutAllRequest(type: Int) = ServiceCreator.create(SvsMmcService::class.java).shutAllRequest(type).await()
+    suspend fun getActionList() = ServiceCreator.create(FlowService::class.java).getActionList().await()
+
+    suspend fun getDevTypeList() = ServiceCreator.create(FlowService::class.java).getDevTypeList().await()
+
+    suspend fun getDevList() = ServiceCreator.create(FlowService::class.java).getDevList().await()
+
+    suspend fun execute(action: Int, devtype: Int, devno: Int, intv: Int, filename: String) =
+        ServiceCreator.create(FlowService::class.java).execute(action, devtype, devno, intv, filename).await()
+
+    suspend fun getStepList() = ServiceCreator.create(FlowService::class.java).getStepList().await()
+
+    suspend fun getStepAction(step: Int) = ServiceCreator.create(FlowService::class.java).getStepAction(step).await()
+
+    suspend fun getFileList() = ServiceCreator.create(FileListService::class.java).getFileList().await()
 
     private suspend fun <T> Call<T>.await(): T {
         return suspendCoroutine { continuation ->
