@@ -23,8 +23,8 @@ class DebugFragment : Fragment() {
     private lateinit var viewModel: DebugViewModel
     private var _binding: FragmentDebugBinding? = null
     private var actionList = mutableListOf<Action>()
-    private var devList = mutableListOf<Device>()
     private var devTypeList = mutableListOf<DevType>()
+    private var devList = mutableListOf<Device>()
     private var fileList = mutableListOf<PlayFile>()
     private var action = 0
     private var devtype = 0
@@ -45,31 +45,45 @@ class DebugFragment : Fragment() {
         _binding = FragmentDebugBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        viewModel.actionList.observe(viewLifecycleOwner, { items ->
+        viewModel.actionList.observe(viewLifecycleOwner) { items ->
             actionList = items
-            refreshMenus()
-        })
-        viewModel.devList.observe(viewLifecycleOwner, { items ->
-            devList = items
-            refreshMenus()
-        })
-        viewModel.devTypeList.observe(viewLifecycleOwner, { items ->
+            refreshMenus(actionList, devTypeList, devList, fileList)
+        }
+        viewModel.devTypeList.observe(viewLifecycleOwner) { items ->
             devTypeList = items
-            refreshMenus()
-        })
-        viewModel.fileList.observe(viewLifecycleOwner, { items ->
+        }
+        viewModel.devList.observe(viewLifecycleOwner) { items ->
+            devList = items
+        }
+        viewModel.fileList.observe(viewLifecycleOwner) { items ->
             fileList = items
-            refreshMenus()
-        })
+        }
 
-//        todo 增加列表关联关系
-        (binding.actionMenu.editText as? AutoCompleteTextView)?.setOnItemClickListener { _, _, position, _ -> action = actionList[position].action }
+        (binding.actionMenu.editText as? AutoCompleteTextView)?.setOnItemClickListener { _, _, position, _ ->
+            action = actionList[position].action
+            when {
+                setOf(11, 12, 13, 14, 15, 16).contains(action) -> {
+                    val tDevTypeList = mutableListOf<DevType>(DevType(10, "电脑"))
+                    val tDevList = devList.filter { it.typeid == 10 }.toMutableList()
+                    refreshMenus(actionList, tDevTypeList, tDevList, fileList)
+                }
+                setOf(21, 22).contains(action) -> {
+                    val tDevTypeList = devTypeList.filter { setOf(10, 20, 30, 40, 50).contains(it.typeid) }.toMutableList()
+                    val tDevList = devList.filter { setOf(10, 20, 30, 40, 50).contains(it.typeid) }.toMutableList()
+                    refreshMenus(actionList, tDevTypeList, tDevList, mutableListOf())
+                }
+                else -> {
+                    refreshMenus(actionList, devTypeList, devList, fileList)
+                }
+            }
+        }
         (binding.devTypeMenu.editText as? AutoCompleteTextView)?.setOnItemClickListener { _, _, position, _ ->
             devtype = devTypeList[position].typeid
+            val tDevList = devList.filter { it.typeid == devtype }.toMutableList()
+            refreshMenus(null, null, tDevList, null)
         }
         (binding.devNoMenu.editText as? AutoCompleteTextView)?.setOnItemClickListener { _, _, position, _ -> devno = devList[position].devno }
         binding.brightness.addOnChangeListener { _, value, _ -> intv = value.toInt() }
-
 
         binding.btnExecute.setOnClickListener {
             val args = mapOf<String, Any>(
@@ -77,7 +91,7 @@ class DebugFragment : Fragment() {
                 "devtype" to devtype,
                 "devno" to devno,
                 "intv" to intv,
-                "filename" to binding.filename.editText?.text.toString()
+                "filename" to binding.filenameMenu.editText?.text.toString()
             )
             Log.d("debug args:", args.toString())
             viewModel.execute(args)
@@ -98,30 +112,38 @@ class DebugFragment : Fragment() {
         _binding = null
     }
 
-    fun refreshMenus() {
-        (binding.devTypeMenu.editText as? AutoCompleteTextView)?.setAdapter(
-            ArrayAdapter(
-                requireContext(),
-                R.layout.menu_item,
-                devTypeList.map { it.typename })
-        )
-        (binding.actionMenu.editText as? AutoCompleteTextView)?.setAdapter(
-            ArrayAdapter(
-                requireContext(),
-                R.layout.menu_item,
-                actionList.map { it.memo })
-        )
-        (binding.devNoMenu.editText as? AutoCompleteTextView)?.setAdapter(
-            ArrayAdapter(
-                requireContext(),
-                R.layout.menu_item,
-                devList.map { it.devname })
-        )
-        (binding.filename.editText as? AutoCompleteTextView)?.setAdapter(
-            ArrayAdapter(
-                requireContext(),
-                R.layout.menu_item,
-                fileList.map { it.filename })
-        )
+    fun refreshMenus(
+        tActionList: MutableList<Action>?,
+        tDevTypeList: MutableList<DevType>?,
+        tDevList: MutableList<Device>?,
+        tFileList: MutableList<PlayFile>?
+    ) {
+        if (tActionList != null) {
+            val actionAdapter = ArrayAdapter(requireContext(), R.layout.menu_item, tActionList.map { it.memo })
+            val actionMenu = (binding.actionMenu.editText as? AutoCompleteTextView)
+            actionMenu?.setAdapter(actionAdapter)
+            if (tActionList.isNotEmpty() && tActionList.none { it.memo == actionMenu?.text.toString() }) actionMenu?.setText("", false)
+        }
+
+        if (tDevTypeList != null) {
+            val devTypeAdapter = ArrayAdapter(requireContext(), R.layout.menu_item, tDevTypeList.map { it.typename })
+            val devTypeMenu = (binding.devTypeMenu.editText as? AutoCompleteTextView)
+            devTypeMenu?.setAdapter(devTypeAdapter)
+            if (tDevTypeList.isNotEmpty() && tDevTypeList.none { it.typename == devTypeMenu?.text.toString() }) devTypeMenu?.setText("", false)
+        }
+
+        if (tDevList != null) {
+            val devNoAdapter = ArrayAdapter(requireContext(), R.layout.menu_item, tDevList.map { it.devname })
+            val devNoMenu = (binding.devNoMenu.editText as? AutoCompleteTextView)
+            devNoMenu?.setAdapter(devNoAdapter)
+            if (tDevList.isNotEmpty() && tDevList.none { it.devname == devNoMenu?.text.toString() }) devNoMenu?.setText("", false)
+        }
+
+        if (tFileList != null) {
+            val filenameAdapter = ArrayAdapter(requireContext(), R.layout.menu_item, tFileList.map { it.filename })
+            val fileMenu = (binding.filenameMenu.editText as? AutoCompleteTextView)
+            fileMenu?.setAdapter(filenameAdapter)
+            if (tFileList.isNotEmpty() && tFileList.none { it.filename == fileMenu?.text.toString() }) fileMenu?.setText("", false)
+        }
     }
 }

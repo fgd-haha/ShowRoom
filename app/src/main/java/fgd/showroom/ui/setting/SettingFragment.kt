@@ -41,12 +41,12 @@ class SettingFragment : Fragment() {
         binding.stepListRecyclerView.layoutManager = steplayoutManager
         val stepAdapter = StepListAdapter(stepList)
         binding.stepListRecyclerView.adapter = stepAdapter
-        viewModel.stepList.observe(viewLifecycleOwner, { items ->
+        viewModel.stepList.observe(viewLifecycleOwner) { items ->
             Log.d("SettingFragment", items.toString())
             stepList = items
             stepAdapter.setStepList(stepList)
             stepAdapter.notifyDataSetChanged()
-        })
+        }
         ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
             override fun onMove(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, target: RecyclerView.ViewHolder): Boolean {
                 return false
