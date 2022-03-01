@@ -21,35 +21,26 @@ class StepActionAdapter(private var stepActionList: List<StepAction>) : Recycler
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = ActionItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        val holder = ViewHolder(binding)
-//        holder.itemView.setOnClickListener {
-//            val position = holder.bindingAdapterPosition
-//            val step = placeList[position]
-//            val activity = fragment.activity
-//            if (activity is WeatherActivity) {
-//                activity.binding.drawerLayout.closeDrawers()
-//                activity.viewModel.locationLng = step.location.lng
-//                activity.viewModel.locationLat = step.location.lat
-//                activity.viewModel.placeName = step.name
-//                activity.refreshWeather()
-//            } else {
-//                val intent = Intent(parent.context, WeatherActivity::class.java).apply {
-//                    putExtra("location_lng", step.location.lng)
-//                    putExtra("location_lat", step.location.lat)
-//                    putExtra("place_name", step.name)
-//                }
-//                fragment.startActivity(intent)
-//                activity?.finish()
-//            }
-//            fragment.viewModel.savePlace(step)
-//        }
-        return holder
+        return ViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val stepAction = stepActionList[position]
         holder.stepidx.text = stepAction.stepidx.toString()
-        holder.action.text = stepAction.action.toString()
+        holder.action.text = when (stepAction.action) {
+            11 -> stepAction.devno.toString() + "号机器播放 【" + stepAction.filename + "】"
+            12 -> stepAction.devno.toString() + "号机器停止播放"
+            13 -> stepAction.devno.toString() + "号机器暂停"
+            14 -> stepAction.devno.toString() + "号机器恢复播放"
+            21 -> stepAction.devno.toString() + "号投影仪开机"
+            22 -> stepAction.devno.toString() + "号投影仪关机"
+            31 -> stepAction.devno.toString() + "号LED机器待机"
+            32 -> stepAction.devno.toString() + "号LED机器播放"
+            41 -> stepAction.devno.toString() + "号融和机循环播放 【" + stepAction.filename + "】"
+            42 -> stepAction.devno.toString() + "号融和机播放 【" + stepAction.filename + "】"
+            55 -> "延时" + stepAction.intv.toString() + "秒"
+            else -> "未知动作"
+        }
     }
 
     override fun getItemCount() = stepActionList.size

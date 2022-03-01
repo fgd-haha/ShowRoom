@@ -71,6 +71,15 @@ object Repository {
 
     fun getStepAction(step: Int) = fire(Dispatchers.IO) { Result.success(ShowRoomNetwork.getStepAction(step)) }
 
+    fun addStep(stepno: Int, stepname: String) = fire(Dispatchers.IO) { Result.success(ShowRoomNetwork.addStep(stepno, stepname)) }
+
+    fun deleteStep(stepno: Int) = fire(Dispatchers.IO) {
+        Log.i("Repository", stepno.toString())
+        Result.success(ShowRoomNetwork.deleteStep(stepno))
+    }
+
+    fun modStepPos(stepno: Int, posx: Int, posy: Int) = fire(Dispatchers.IO) { Result.success(ShowRoomNetwork.modStepPos(stepno, posx, posy)) }
+
     private suspend fun <T> list(block: suspend () -> MutableList<T>): MutableList<T> {
         return try {
             block()

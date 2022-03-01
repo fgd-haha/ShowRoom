@@ -124,7 +124,7 @@ class StatusFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             withContext(Dispatchers.Default) { statusViewModel.monitorServiceStatus() }
         }
-        statusViewModel.isConnected.observe(viewLifecycleOwner, { result ->
+        statusViewModel.isConnected.observe(viewLifecycleOwner) { result ->
             if (result.isSuccess) {
                 binding.btnServer.setImageDrawable(
                     ContextCompat.getDrawable(
@@ -138,9 +138,9 @@ class StatusFragment : Fragment() {
                     )
                 )
             }
-        })
+        }
 
-        statusViewModel.computersStatus.observe(viewLifecycleOwner, { result ->
+        statusViewModel.computersStatus.observe(viewLifecycleOwner) { result ->
             val computerList = result.getOrNull() ?: listOf()
             var hasOnline = false
             var hasOffline = false
@@ -154,7 +154,7 @@ class StatusFragment : Fragment() {
                 }
             }
             binding.btnComputer.setImageDrawable(ContextCompat.getDrawable(requireContext(), img))
-        })
+        }
 
     }
 }

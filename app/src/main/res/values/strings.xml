@@ -15,5 +15,9 @@
     <string name="debug_filename">文件名称</string>
     <string name="debug_brightness">亮度</string>
     <string name="debug_execute">执行</string>
+    <string name="setting_add_step">增加步数</string>
+    <string name="setting_step_pos">步数定位</string>
+    <string name="setting_add_action">增加动作</string>
+    <string name="setting_clone_action">复制动作</string>
 
 </resources>

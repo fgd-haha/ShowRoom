@@ -1,6 +1,7 @@
 package fgd.showroom.ui.setting
 
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
@@ -9,7 +10,7 @@ import fgd.showroom.databinding.StepItemBinding
 import fgd.showroom.logic.model.Step
 
 
-class StepListAdapter(private var stepList: List<Step>) : RecyclerView.Adapter<StepListAdapter.ViewHolder>() {
+class StepListAdapter(private val fragment: SettingFragment, private var stepList: List<Step>) : RecyclerView.Adapter<StepListAdapter.ViewHolder>() {
     inner class ViewHolder(binding: StepItemBinding) : RecyclerView.ViewHolder(binding.root) {
         val stepNo: TextView = binding.stepNo
         val stepName: TextView = binding.stepName
@@ -22,27 +23,11 @@ class StepListAdapter(private var stepList: List<Step>) : RecyclerView.Adapter<S
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = StepItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         val holder = ViewHolder(binding)
-//        holder.itemView.setOnClickListener {
-//            val position = holder.bindingAdapterPosition
-//            val step = placeList[position]
-//            val activity = fragment.activity
-//            if (activity is WeatherActivity) {
-//                activity.binding.drawerLayout.closeDrawers()
-//                activity.viewModel.locationLng = step.location.lng
-//                activity.viewModel.locationLat = step.location.lat
-//                activity.viewModel.placeName = step.name
-//                activity.refreshWeather()
-//            } else {
-//                val intent = Intent(parent.context, WeatherActivity::class.java).apply {
-//                    putExtra("location_lng", step.location.lng)
-//                    putExtra("location_lat", step.location.lat)
-//                    putExtra("place_name", step.name)
-//                }
-//                fragment.startActivity(intent)
-//                activity?.finish()
-//            }
-//            fragment.viewModel.savePlace(step)
-//        }
+        holder.itemView.setOnClickListener {
+            val step = this.stepList[holder.adapterPosition]
+            Log.w("StepListAdapter", step.toString())
+            fragment.viewModel.refreshStepAction(step.stepno)
+        }
         return holder
     }
 

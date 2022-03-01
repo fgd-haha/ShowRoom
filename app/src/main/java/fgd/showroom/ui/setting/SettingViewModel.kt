@@ -10,17 +10,27 @@ import kotlinx.coroutines.launch
 
 class SettingViewModel : ViewModel() {
 
-    private val stepLiveData = MutableLiveData<Int>()
+    private val addStepLiveData = MutableLiveData<Step>()
+    private val deleteStepLiveData = MutableLiveData<Step>()
+    private val stepnoLiveData = MutableLiveData<Int>()
     private val _stepList = MutableLiveData<MutableList<Step>>().apply { viewModelScope.launch { value = Repository.getStepList() } }
     val stepList = _stepList
 
     fun refreshStepList() = viewModelScope.launch { _stepList.value = Repository.getStepList() }
 
-    val stepActionListLiveData = Transformations.switchMap(stepLiveData) { step ->
-        Repository.getStepAction(step)
+    val stepActionListLiveData = Transformations.switchMap(stepnoLiveData) { step -> Repository.getStepAction(step) }
+
+    fun refreshStepAction(step: Int) = stepnoLiveData.postValue(step)
+
+    val addStepRp = Transformations.switchMap(addStepLiveData) { step -> Repository.addStep(step.stepno, step.stepname) }
+    fun addStep(stepno: Int, stepname: String) {
+        addStepLiveData.value = Step(stepno, stepname, 0, 0)
     }
 
-    fun refreshStepAction(step: Int) {
-        stepLiveData.postValue(step)
+    val deleteStepRp = Transformations.switchMap(deleteStepLiveData) { step -> Repository.deleteStep(step.stepno) }
+    fun deleteStep(stepno: Int) {
+        deleteStepLiveData.value = Step(stepno, "", 0, 0)
     }
+
+    fun modStepPos(stepno: Int, posx: Int, posy: Int) = Repository.modStepPos(stepno, posx, posy)
 }

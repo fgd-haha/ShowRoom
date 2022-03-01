@@ -20,6 +20,15 @@ interface FlowService {
     @GET("getsteplist")
     fun getStepList(): Call<List<Step>>
 
+    @GET("addstep")
+    fun addStep(@Query("stepno") stepno: Int, @Query("stepname") stepname: String): Call<CommonResponse>
+
+    @GET("delestep")
+    fun deleteStep(@Query("stepno") stepno: Int): Call<CommonResponse>
+
+    @GET("modsteppos")
+    fun modStepPos(@Query("stepno") stepno: Int, @Query("posx") posx: Int, @Query("posy") posy: Int): Call<CommonResponse>
+
     @GET("getstepinfo")
     fun getStepAction(@Query("step") step: Int): Call<List<StepAction>>
 
