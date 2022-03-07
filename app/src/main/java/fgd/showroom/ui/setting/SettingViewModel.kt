@@ -18,6 +18,7 @@ class SettingViewModel : ViewModel() {
     private val stepnoLiveData = MutableLiveData<Int>()
     private val deleWizardLiveData = MutableLiveData<Int>()
     private val saveWizardLiveData = MutableLiveData<StepAction>()
+    private val copystepLiveData = MutableLiveData<List<Int>>()
     private val _stepList = MutableLiveData<MutableList<Step>>().apply { viewModelScope.launch { value = Repository.getStepList() } }
     val devTypeList = MutableLiveData<MutableList<DevType>>().apply { viewModelScope.launch { value = Repository.getDevTypeList() } }
     val devList = MutableLiveData<MutableList<Device>>().apply { viewModelScope.launch { value = Repository.getDevList() } }
@@ -54,6 +55,11 @@ class SettingViewModel : ViewModel() {
     val saveWizardRp = Transformations.switchMap(saveWizardLiveData) { stepAction -> Repository.saveWizard(stepAction) }
     fun saveWizard(stepAction: StepAction) {
         saveWizardLiveData.value = stepAction
+    }
+
+    val copystepRp = Transformations.switchMap(copystepLiveData) { l -> Repository.copystep(l[0], l[1]) }
+    fun copystep(srcstep: Int, dststep: Int) {
+        copystepLiveData.value = listOf<Int>(srcstep, dststep)
     }
 
     val deleWizardRp = Transformations.switchMap(deleWizardLiveData) { id -> Repository.deleWizard(id) }

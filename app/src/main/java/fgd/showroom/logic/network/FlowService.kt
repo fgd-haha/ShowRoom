@@ -26,6 +26,9 @@ interface FlowService {
     @GET("delestep")
     fun deleteStep(@Query("stepno") stepno: Int): Call<CommonResponse>
 
+    @GET("copystep")
+    fun copystep(@Query("srcstep") srcstep: Int, @Query("dststep") dststep: Int): Call<CommonResponse>
+
     @GET("modsteppos")
     fun modStepPos(@Query("stepno") stepno: Int, @Query("posx") posx: Int, @Query("posy") posy: Int): Call<CommonResponse>
 

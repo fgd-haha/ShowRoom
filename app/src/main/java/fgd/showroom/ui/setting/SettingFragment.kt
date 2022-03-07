@@ -14,8 +14,9 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import fgd.showroom.databinding.AddStepDialogBinding
+import fgd.showroom.databinding.CopyStepDialogBinding
 import fgd.showroom.databinding.FragmentSettingBinding
-import fgd.showroom.databinding.StepInputDialogBinding
 import fgd.showroom.logic.model.Step
 import fgd.showroom.logic.model.StepAction
 import fgd.showroom.ui.observeStepRpInfo
@@ -27,11 +28,13 @@ class SettingFragment : Fragment() {
 
     val viewModel by lazy { ViewModelProvider(this)[SettingViewModel::class.java] }
     private var _binding: FragmentSettingBinding? = null
-    private var _sbinding: StepInputDialogBinding? = null
+    private var _addstepbinding: AddStepDialogBinding? = null
+    private var _copystepbinding: CopyStepDialogBinding? = null
 
     private var stepList = mutableListOf<Step>()
     private var stepActionList = mutableListOf<StepAction>()
-    private val sbinding get() = _sbinding!!
+    private val addstepbinding get() = _addstepbinding!!
+    private val copystepbinding get() = _copystepbinding!!
     private val binding get() = _binding!!
     private val TAG = "SettingFragment"
 
@@ -44,7 +47,8 @@ class SettingFragment : Fragment() {
 
         _binding = FragmentSettingBinding.inflate(inflater, container, false)
         val root: View = binding.root
-        _sbinding = StepInputDialogBinding.inflate(inflater, container, false)
+        _addstepbinding = AddStepDialogBinding.inflate(inflater, container, false)
+        _copystepbinding = CopyStepDialogBinding.inflate(inflater, container, false)
 
 //      step list
         val steplayoutManager = LinearLayoutManager(activity)
@@ -82,8 +86,10 @@ class SettingFragment : Fragment() {
 
         observeStepRpInfo(requireActivity(), requireActivity(), viewModel.deleteStepRp, viewModel)
         observeStepRpInfo(requireActivity(), requireActivity(), viewModel.addStepRp, viewModel)
+        observeStepRpInfo(requireActivity(), requireActivity(), viewModel.copystepRp, viewModel)
 
-        stepDialog()
+        addStepDialog()
+        copyStepDialog()
 
 
 //      action list
@@ -145,34 +151,61 @@ class SettingFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-        _sbinding = null
+        _addstepbinding = null
     }
 
 
-    private fun stepDialog() {
+    private fun addStepDialog() {
         val dialog = MaterialAlertDialogBuilder(requireActivity())
-            .setView(sbinding.root)
+            .setView(addstepbinding.root)
             .setNeutralButton("取消") { _, _ -> }
             .setPositiveButton("保存") { _, _ -> }
             .create()
         dialog.setOnShowListener {
             val button = dialog.getButton(AlertDialog.BUTTON_POSITIVE)
             button.setOnClickListener {
-                val stepnoStr = sbinding.inputStepNo.editText?.text.toString()
+                val stepnoStr = addstepbinding.inputStepNo.editText?.text.toString()
                 val stepno = try {
                     stepnoStr.toInt()
                 } catch (e: Exception) {
-                    sbinding.inputStepNo.error = "部署编号为数字！"
+                    addstepbinding.inputStepNo.error = "部署编号为数字！"
                     -1
                 }
                 if (stepno >= 0) {
-                    sbinding.inputStepNo.error = null
-                    val stepname = sbinding.inputStepName.editText?.text.toString()
+                    addstepbinding.inputStepNo.error = null
+                    val stepname = addstepbinding.inputStepName.editText?.text.toString()
                     viewModel.addStep(stepno, stepname)
                     dialog.dismiss();
                 }
             }
         }
         binding.btnAddStep.setOnClickListener { dialog.show() }
+    }
+
+
+    private fun copyStepDialog() {
+        val dialog = MaterialAlertDialogBuilder(requireActivity())
+            .setView(copystepbinding.root)
+            .setNeutralButton("取消") { _, _ -> }
+            .setPositiveButton("复制") { _, _ -> }
+            .create()
+        dialog.setOnShowListener {
+            val button = dialog.getButton(AlertDialog.BUTTON_POSITIVE)
+            button.setOnClickListener {
+                val stepnoStr = copystepbinding.inputStepNo.editText?.text.toString()
+                val stepno = try {
+                    stepnoStr.toInt()
+                } catch (e: Exception) {
+                    copystepbinding.inputStepNo.error = "部署编号为数字！"
+                    -1
+                }
+                if (stepno >= 0) {
+                    copystepbinding.inputStepNo.error = null
+                    viewModel.copystep(stepno, viewModel.nowStepno)
+                    dialog.dismiss()
+                }
+            }
+        }
+        binding.btnCopyStep.setOnClickListener { dialog.show() }
     }
 }

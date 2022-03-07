@@ -37,6 +37,8 @@ object ShowRoomNetwork {
 
     suspend fun deleteStep(stepno: Int) = ServiceCreator.create(FlowService::class.java).deleteStep(stepno).await()
 
+    suspend fun copystep(srcstep: Int, dststep: Int) = ServiceCreator.create(FlowService::class.java).copystep(srcstep, dststep).await()
+
     suspend fun modStepPos(stepno: Int, posx: Int, posy: Int) = ServiceCreator.create(FlowService::class.java).modStepPos(stepno, posx, posy).await()
 
     suspend fun getStepAction(step: Int) = ServiceCreator.create(FlowService::class.java).getStepAction(step).await()

@@ -117,7 +117,7 @@
         app:layout_constraintStart_toStartOf="@+id/guideline9" />
 
     <Button
-        android:id="@+id/btn_clone_action"
+        android:id="@+id/btn_copy_step"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/setting_clone_action"

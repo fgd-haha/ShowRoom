@@ -77,6 +77,8 @@ object Repository {
 
     fun modStepPos(stepno: Int, posx: Int, posy: Int) = fire(Dispatchers.IO) { Result.success(ShowRoomNetwork.modStepPos(stepno, posx, posy)) }
 
+    fun copystep(srcstep: Int, dststep: Int) = fire(Dispatchers.IO) { Result.success(ShowRoomNetwork.copystep(srcstep, dststep)) }
+
     fun saveWizard(stepAction: StepAction) = fire(Dispatchers.IO) { Result.success(ShowRoomNetwork.saveWizard(stepAction)) }
 
     fun deleWizard(id: Int) = fire(Dispatchers.IO) { Result.success(ShowRoomNetwork.deleWizard(id)) }
