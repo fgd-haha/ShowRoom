@@ -13,7 +13,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ShowRoom">
-
+        <activity
+            android:name=".ui.setting.action.ActionActivity"
+            android:exported="false"
+            android:label="@string/action_activity_name"
+            android:theme="@style/Theme.ShowRoom.NoActionBar"
+            android:windowSoftInputMode="stateAlwaysHidden">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="fgd.showroom.MainActivity" />
+        </activity>
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -25,7 +34,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".ui.status.computers.ComputersActivity"
             android:exported="false"
@@ -35,7 +43,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="fgd.showroom.MainActivity" />
         </activity>
-
     </application>
 
 </manifest>

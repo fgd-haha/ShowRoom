@@ -1,6 +1,7 @@
 package fgd.showroom.ui.setting
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -18,9 +19,12 @@ import fgd.showroom.databinding.StepInputDialogBinding
 import fgd.showroom.logic.model.Step
 import fgd.showroom.logic.model.StepAction
 import fgd.showroom.ui.observeStepRpInfo
+import fgd.showroom.ui.observeWizardRpInfo
+import fgd.showroom.ui.setting.action.ActionActivity
 
 
 class SettingFragment : Fragment() {
+
     val viewModel by lazy { ViewModelProvider(this)[SettingViewModel::class.java] }
     private var _binding: FragmentSettingBinding? = null
     private var _sbinding: StepInputDialogBinding? = null
@@ -52,7 +56,7 @@ class SettingFragment : Fragment() {
             stepList = items
             stepAdapter.setStepList(stepList)
             stepAdapter.notifyDataSetChanged()
-            if (stepList.size > 0) viewModel.refreshStepAction(stepList[0].stepno)
+            viewModel.refreshStepAction(-1)
         }
 
         ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
@@ -67,8 +71,6 @@ class SettingFragment : Fragment() {
                     .setPositiveButton("删除") { _, _ ->
                         val position = viewHolder.adapterPosition
                         viewModel.deleteStep(stepList[position].stepno)
-                        viewModel.refreshStepList()
-                        viewModel.refreshStepAction(stepList[0].stepno)
                     }
                     .setNegativeButton("取消") { _, _ ->
                         stepAdapter.notifyItemChanged(viewHolder.adapterPosition)
@@ -87,7 +89,7 @@ class SettingFragment : Fragment() {
 //      action list
         val layoutManager = LinearLayoutManager(activity)
         binding.stepActionRecyclerView.layoutManager = layoutManager
-        val adapter = StepActionAdapter(stepActionList)
+        val adapter = StepActionAdapter(this, stepActionList)
         binding.stepActionRecyclerView.adapter = adapter
         viewModel.stepActionListLiveData.observe(viewLifecycleOwner) { result ->
             if (result.isSuccess) {
@@ -107,9 +109,7 @@ class SettingFragment : Fragment() {
                     .setMessage("确定删除此动作?")
                     .setPositiveButton("删除") { _, _ ->
                         val position = viewHolder.adapterPosition
-                        stepActionList.removeAt(position)
-                        adapter.setStepActionList(stepActionList)
-                        adapter.notifyDataSetChanged()
+                        viewModel.deleWizard(stepActionList[position].id!!)
                     }
                     .setNegativeButton("取消") { _, _ ->
                         adapter.notifyItemChanged(viewHolder.adapterPosition)
@@ -119,12 +119,27 @@ class SettingFragment : Fragment() {
             }
         }).attachToRecyclerView(binding.stepActionRecyclerView)
 
+        observeWizardRpInfo(requireActivity(), requireActivity(), viewModel.deleWizardRp, viewModel)
+        observeWizardRpInfo(requireActivity(), requireActivity(), viewModel.saveWizardRp, viewModel)
+
+        binding.btnAddAction.setOnClickListener {
+            val intent = Intent(activity, ActionActivity::class.java).apply {
+                putExtra("stepno", viewModel.nowStepno)
+            }
+            this.startActivity(intent)
+        }
+
         return root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         activity?.title = "步骤设置"
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.refreshStepList()
     }
 
     override fun onDestroyView() {

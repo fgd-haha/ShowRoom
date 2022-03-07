@@ -6,6 +6,25 @@
     android:layout_height="match_parent"
     tools:context=".ui.debug.DebugFragment">
 
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/input_step_idx"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:hint="执行序号"
+        android:padding="@dimen/activity_horizontal_margin"
+        app:layout_constraintBottom_toTopOf="@+id/guideline16"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:imeOptions="actionDone"
+            android:singleLine="true"
+            android:inputType="number" />
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/action_menu"
@@ -19,6 +38,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/debug_menu_action"
+            android:imeOptions="actionDone"
             android:inputType="none" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -136,6 +156,27 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.55" />
+
+
+    <Button
+        android:id="@+id/btn_save"
+        style="@style/Widget.MaterialComponents.Button.Icon"
+        android:layout_width="100dp"
+        android:layout_height="70dp"
+        android:layout_marginEnd="70dp"
+        android:layout_marginBottom="50dp"
+        android:text="@string/debug_save"
+        app:cornerRadius="10dp"
+        app:icon="@drawable/ic_baseline_alt_route_24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline16"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.20" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

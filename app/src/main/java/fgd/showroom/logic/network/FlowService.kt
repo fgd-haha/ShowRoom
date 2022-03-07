@@ -32,6 +32,21 @@ interface FlowService {
     @GET("getstepinfo")
     fun getStepAction(@Query("step") step: Int): Call<List<StepAction>>
 
+    @GET("savewizard")
+    fun saveWizard(
+        @Query("id") id: Int?,
+        @Query("stepno") stepno: Int,
+        @Query("stepidx") stepidx: Int,
+        @Query("devtype") devtype: Int,
+        @Query("action") action: Int,
+        @Query("devno") devno: Int,
+        @Query("filename") filename: String,
+        @Query("intv") intv: Int
+    ): Call<CommonResponse>
+
+    @GET("delewizard")
+    fun deleWizard(@Query("id") id: Int): Call<CommonResponse>
+
     @GET("execute")
     fun execute(
         @Query("action") action: Int,

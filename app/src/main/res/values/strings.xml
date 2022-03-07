@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">展厅控制</string>
     <string name="computer_activity_name">计算机状态</string>
+    <string name="action_activity_name">执行动作</string>
     <string name="title_status">状态</string>
     <string name="title_guide">导览</string>
     <string name="title_debug">调试</string>
@@ -14,7 +15,8 @@
     <string name="debug_menu_device_no">设备编号</string>
     <string name="debug_filename">文件名称</string>
     <string name="debug_brightness">亮度</string>
-    <string name="debug_execute">执行</string>
+    <string name="debug_execute">测试</string>
+    <string name="debug_save">保存</string>
     <string name="setting_add_step">增加步数</string>
     <string name="setting_step_pos">步数定位</string>
     <string name="setting_add_action">增加动作</string>

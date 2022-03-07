@@ -14,13 +14,14 @@ data class Device(val typeid: Int, val devno: Int, val typename: String, val dev
 
 data class Step(val stepno: Int, val stepname: String, val posx: Int, val posy: Int)
 
+//StepAction == Wizard
 data class StepAction(
+    val id: Int?,
+    val stepno: Int,
     val stepidx: Int,
     val devtype: Int,
-    val devno: Int,
     val action: Int,
+    val devno: Int,
     val filename: String,
-    val intv: Int,
-    val id: Long,
-    val stepno: Int
+    val intv: Int
 )

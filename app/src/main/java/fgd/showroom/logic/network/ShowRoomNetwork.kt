@@ -2,6 +2,7 @@ package fgd.showroom.logic.network
 
 import android.util.Log
 import fgd.showroom.logic.model.CommonResponse
+import fgd.showroom.logic.model.StepAction
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -39,6 +40,20 @@ object ShowRoomNetwork {
     suspend fun modStepPos(stepno: Int, posx: Int, posy: Int) = ServiceCreator.create(FlowService::class.java).modStepPos(stepno, posx, posy).await()
 
     suspend fun getStepAction(step: Int) = ServiceCreator.create(FlowService::class.java).getStepAction(step).await()
+
+    suspend fun saveWizard(stepAction: StepAction) =
+        ServiceCreator.create(FlowService::class.java).saveWizard(
+            stepAction.id,
+            stepAction.stepno,
+            stepAction.stepidx,
+            stepAction.devtype,
+            stepAction.action,
+            stepAction.devno,
+            stepAction.filename,
+            stepAction.intv
+        ).await()
+
+    suspend fun deleWizard(id: Int) = ServiceCreator.create(FlowService::class.java).deleWizard(id).await()
 
     suspend fun getFileList() = ServiceCreator.create(FileListService::class.java).getFileList().await()
 
