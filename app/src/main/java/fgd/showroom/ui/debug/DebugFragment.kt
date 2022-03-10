@@ -168,8 +168,8 @@ class DebugFragment : Fragment() {
         return root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onResume() {
+        super.onResume()
         if (activity is MainActivity) {
             activity?.title = "调试模式"
         } else if (activity is ActionActivity) activity?.title = "设置执行动作"

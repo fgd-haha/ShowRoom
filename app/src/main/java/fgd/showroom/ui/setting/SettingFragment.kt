@@ -138,13 +138,9 @@ class SettingFragment : Fragment() {
         return root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        activity?.title = "步骤设置"
-    }
-
     override fun onResume() {
         super.onResume()
+        activity?.title = "步骤设置"
         viewModel.refreshStepList()
     }
 
