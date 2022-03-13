@@ -1,11 +1,15 @@
 package fgd.showroom.ui
 
 import android.content.Context
+import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import fgd.showroom.R
 import fgd.showroom.logic.model.CommonResponse
 import fgd.showroom.ui.debug.DebugViewModel
+import fgd.showroom.ui.guide.GuideViewModel
 import fgd.showroom.ui.setting.SettingViewModel
 
 
@@ -72,5 +76,31 @@ fun observeDebugWizardRpInfo(owner: LifecycleOwner, context: Context, wizardRp: 
                 Toast.LENGTH_SHORT
             ).show()
         }
+    }
+}
+
+
+fun observeGuideRpInfo(
+    owner: LifecycleOwner,
+    context: Context,
+    gotoStepRp: MutableLiveData<Map<String, Any>>,
+    vm: GuideViewModel,
+    tv_map: MutableMap<Int, TextView>
+) {
+    gotoStepRp.observe(owner) { result ->
+        val stepno = result["stepno"].toString().toInt()
+        val message = result["message"].toString()
+        val r = result["result"].toString().toInt()
+
+        if (r > -1) {
+            tv_map[stepno]?.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.icon_green_72_45, 0, 0)
+        } else {
+            tv_map[stepno]?.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.icon_red_72_45, 0, 0)
+        }
+        Toast.makeText(
+            context,
+            message,
+            Toast.LENGTH_SHORT
+        ).show()
     }
 }

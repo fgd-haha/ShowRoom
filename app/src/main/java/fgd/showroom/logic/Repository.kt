@@ -79,6 +79,19 @@ object Repository {
 
     fun copystep(srcstep: Int, dststep: Int) = fire(Dispatchers.IO) { Result.success(ShowRoomNetwork.copystep(srcstep, dststep)) }
 
+    suspend fun gotostep(stepno: Int): Map<String, Any> {
+        return try {
+            val commonResponse = ShowRoomNetwork.gotostep(stepno)
+            Log.i("Repository", "${stepno.toString()} ${commonResponse.message}")
+            return if (commonResponse.success == 1)
+                mapOf("stepno" to stepno, "result" to 1, "message" to "第${stepno}步，执行成功")
+            else
+                mapOf("stepno" to stepno, "result" to 0, "message" to "第${stepno}步，执行失败")
+        } catch (e: Exception) {
+            mapOf("stepno" to stepno, "result" to 0, "message" to "第${stepno}步，执行失败，$e")
+        }
+    }
+
     fun saveWizard(stepAction: StepAction) = fire(Dispatchers.IO) { Result.success(ShowRoomNetwork.saveWizard(stepAction)) }
 
     fun deleWizard(id: Int) = fire(Dispatchers.IO) { Result.success(ShowRoomNetwork.deleWizard(id)) }

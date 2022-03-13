@@ -15,12 +15,14 @@ import fgd.showroom.MainActivity
 import fgd.showroom.R
 import fgd.showroom.databinding.FragmentGuideBinding
 import fgd.showroom.logic.model.Step
+import fgd.showroom.ui.observeGuideRpInfo
 
 class GuideFragment : Fragment() {
     val viewModel by lazy { ViewModelProvider(this)[GuideViewModel::class.java] }
     private var _binding: FragmentGuideBinding? = null
     private val binding get() = _binding!!
     private var stepList = mutableListOf<Step>()
+    val tv_map = mutableMapOf<Int, TextView>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -30,6 +32,7 @@ class GuideFragment : Fragment() {
         _binding = FragmentGuideBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
+        observeGuideRpInfo(viewLifecycleOwner, requireActivity(), viewModel.gotostepRp, viewModel, tv_map)
         viewModel.stepList.observe(viewLifecycleOwner) { items ->
             Log.d("SettingFragment", items.toString())
             stepList = items
@@ -68,7 +71,7 @@ class GuideFragment : Fragment() {
             textView.id = step.stepno
             textView.text = "${step.stepno} ${step.stepname}"
 
-            textView.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.icon_red_72_45, 0, 0);
+            textView.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.icon_red_72_45, 0, 0)
 
             val tvParams = RelativeLayout.LayoutParams(
                 RelativeLayout.LayoutParams.WRAP_CONTENT,
@@ -83,7 +86,12 @@ class GuideFragment : Fragment() {
             }
 
             binding.root.addView(textView, tvParams)
+            tv_map[textView.id] = textView
 //            btn.setOnTouchListener(mBtnListener)
+            textView.setOnClickListener {
+                viewModel.gotostep(textView.id)
+                textView.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.icon_yellow_72_45, 0, 0)
+            }
         }
     }
 }
