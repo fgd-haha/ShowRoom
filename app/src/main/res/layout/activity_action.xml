@@ -46,7 +46,7 @@
             android:name="fgd.showroom.ui.debug.DebugFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="25dp" />
+            android:layout_marginTop="0dp" />
 
     </FrameLayout>
 

@@ -20,6 +20,7 @@
         <entry key="..\:/code/external/ShowroomApp/ShowRoom/app/src/main/res/layout/activity_computers.xml" value="0.35875" />
         <entry key="..\:/code/external/ShowroomApp/ShowRoom/app/src/main/res/layout/activity_main.xml" value="0.37421875" />
         <entry key="..\:/code/external/ShowroomApp/ShowRoom/app/src/main/res/layout/activity_main2.xml" value="0.1" />
+        <entry key="..\:/code/external/ShowroomApp/ShowRoom/app/src/main/res/layout/activity_step_pos.xml" value="0.37421875" />
         <entry key="..\:/code/external/ShowroomApp/ShowRoom/app/src/main/res/layout/content_main.xml" value="0.35875" />
         <entry key="..\:/code/external/ShowroomApp/ShowRoom/app/src/main/res/layout/copy_step_dialog.xml" value="0.1546875" />
         <entry key="..\:/code/external/ShowroomApp/ShowRoom/app/src/main/res/layout/fragment_debug.xml" value="0.1796875" />
@@ -31,6 +32,8 @@
         <entry key="..\:/code/external/ShowroomApp/ShowRoom/app/src/main/res/layout/step_item.xml" value="0.37421875" />
         <entry key="..\:/code/external/ShowroomApp/ShowRoom/app/src/main/res/layout/text_input_server_setting.xml" value="0.19140625" />
         <entry key="..\:/code/external/ShowroomApp/ShowRoom/app/src/main/res/menu/bottom_nav_menu.xml" value="0.8" />
+        <entry key="..\:/code/external/ShowroomApp/ShowRoom/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.252" />
+        <entry key="..\:/code/external/ShowroomApp/ShowRoom/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.252" />
         <entry key="app/src/main/res/layout/fragment_debug.xml" value="0.41354166666666664" />
       </map>
     </option>
