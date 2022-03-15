@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.DisplayMetrics
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RelativeLayout
@@ -16,6 +17,8 @@ import fgd.showroom.R
 import fgd.showroom.databinding.FragmentGuideBinding
 import fgd.showroom.logic.model.Step
 import fgd.showroom.ui.observeGuideRpInfo
+import fgd.showroom.ui.observeStepPosRpInfo
+import fgd.showroom.ui.setting.stepPos.StepPosActivity
 
 class GuideFragment : Fragment() {
     val viewModel by lazy { ViewModelProvider(this)[GuideViewModel::class.java] }
@@ -23,6 +26,7 @@ class GuideFragment : Fragment() {
     private val binding get() = _binding!!
     private var stepList = mutableListOf<Step>()
     val tv_map = mutableMapOf<Int, TextView>()
+    private val TAG = "GuideFragment"
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -55,7 +59,7 @@ class GuideFragment : Fragment() {
     }
 
 
-    @SuppressLint("SetTextI18n")
+    @SuppressLint("SetTextI18n", "ClickableViewAccessibility")
     private fun dispStepList() {
         if (stepList.size <= 0) return
 
@@ -87,11 +91,48 @@ class GuideFragment : Fragment() {
 
             binding.root.addView(textView, tvParams)
             tv_map[textView.id] = textView
-//            btn.setOnTouchListener(mBtnListener)
-            textView.setOnClickListener {
-                viewModel.gotostep(textView.id)
-                textView.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.icon_yellow_72_45, 0, 0)
+
+            if (activity is StepPosActivity) {
+                var lastX: Int = 0
+                var lastY: Int = 0
+                var mLayoutParam = RelativeLayout.LayoutParams(0, 0)
+                textView.setOnTouchListener { v, event ->
+                    when (event.action) {
+                        MotionEvent.ACTION_DOWN -> {
+                            lastX = event.rawX.toInt()
+                            lastY = event.rawY.toInt()
+                            mLayoutParam = v.layoutParams as RelativeLayout.LayoutParams
+                            Log.i(TAG, "action_down: ${textView.id} $lastX $lastY")
+                        }
+                        MotionEvent.ACTION_MOVE -> {
+                            //移动中动态设置位置
+                            val dx: Int = event.rawX.toInt() - lastX
+                            val dy: Int = event.rawY.toInt() - lastY
+
+                            //将当前的位置再次设置
+                            lastX = event.rawX.toInt()
+                            lastY = event.rawY.toInt()
+
+                            mLayoutParam.leftMargin += dx
+                            mLayoutParam.topMargin += dy
+                            v.layoutParams = mLayoutParam
+                            Log.i(TAG, "action_move: ${textView.id} $lastX $lastY")
+                        }
+                        MotionEvent.ACTION_UP -> {
+                            viewModel.modStepPos(v.id, mLayoutParam.leftMargin, mLayoutParam.topMargin)
+                            Log.i(TAG, "action_up: ${textView.id} $lastX $lastY, ${mLayoutParam.leftMargin}, ${mLayoutParam.topMargin}")
+                        }
+                    }
+                    true
+                }
+            } else if (activity is MainActivity) {
+                textView.setOnClickListener {
+                    viewModel.gotostep(textView.id)
+                    textView.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.icon_yellow_72_45, 0, 0)
+                }
             }
         }
+        observeStepPosRpInfo(requireActivity(), requireActivity(), viewModel.modStepPosRp, viewModel)
     }
+
 }

@@ -2,6 +2,7 @@
     <string name="app_name">展厅控制</string>
     <string name="computer_activity_name">计算机状态</string>
     <string name="action_activity_name">执行动作</string>
+    <string name="step_pos_activity_name">设置步骤位置</string>
     <string name="title_status">状态</string>
     <string name="title_guide">导览</string>
     <string name="title_debug">调试</string>

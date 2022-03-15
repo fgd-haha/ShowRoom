@@ -14,6 +14,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ShowRoom">
         <activity
+            android:name=".ui.setting.stepPos.StepPosActivity"
+            android:exported="false"
+            android:label="@string/step_pos_activity_name"
+            android:theme="@style/Theme.ShowRoom.NoActionBar"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
             android:name=".ui.setting.action.ActionActivity"
             android:exported="false"
             android:label="@string/action_activity_name"

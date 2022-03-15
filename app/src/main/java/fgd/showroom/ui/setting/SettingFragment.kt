@@ -22,6 +22,7 @@ import fgd.showroom.logic.model.StepAction
 import fgd.showroom.ui.observeStepRpInfo
 import fgd.showroom.ui.observeWizardRpInfo
 import fgd.showroom.ui.setting.action.ActionActivity
+import fgd.showroom.ui.setting.stepPos.StepPosActivity
 
 
 class SettingFragment : Fragment() {
@@ -126,12 +127,16 @@ class SettingFragment : Fragment() {
         }).attachToRecyclerView(binding.stepActionRecyclerView)
 
         observeWizardRpInfo(requireActivity(), requireActivity(), viewModel.deleWizardRp, viewModel)
-        observeWizardRpInfo(requireActivity(), requireActivity(), viewModel.saveWizardRp, viewModel)
 
         binding.btnAddAction.setOnClickListener {
             val intent = Intent(activity, ActionActivity::class.java).apply {
                 putExtra("stepno", viewModel.nowStepno)
             }
+            this.startActivity(intent)
+        }
+
+        binding.btnStepPos.setOnClickListener {
+            val intent = Intent(requireContext(), StepPosActivity::class.java)
             this.startActivity(intent)
         }
 

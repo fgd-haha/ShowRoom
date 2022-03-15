@@ -1,6 +1,7 @@
 package fgd.showroom.ui
 
 import android.content.Context
+import android.util.Log
 import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.LifecycleOwner
@@ -102,5 +103,24 @@ fun observeGuideRpInfo(
             message,
             Toast.LENGTH_SHORT
         ).show()
+    }
+}
+
+fun observeStepPosRpInfo(owner: LifecycleOwner, context: Context, stepPosRp: LiveData<Result<CommonResponse>>, vm: GuideViewModel) {
+    stepPosRp.observe(owner) { result ->
+        Log.i("observeStepPosRpInfo", result.getOrDefault(CommonResponse(1, "移动位置成功")).message)
+        if (result.isSuccess) {
+            Toast.makeText(
+                context,
+                result.getOrDefault(CommonResponse(1, "移动位置成功")).message,
+                Toast.LENGTH_SHORT
+            ).show()
+        } else {
+            Toast.makeText(
+                context,
+                result.exceptionOrNull().toString(),
+                Toast.LENGTH_SHORT
+            ).show()
+        }
     }
 }

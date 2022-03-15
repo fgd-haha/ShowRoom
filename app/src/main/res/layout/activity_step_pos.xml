@@ -4,12 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".ui.setting.action.ActionActivity">
+    tools:context=".ui.setting.stepPos.StepPosActivity">
 
 
     <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/appBarLayout2"
+        android:id="@+id/appBarLayout3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/Theme.ShowRoom.AppBarOverlay"
@@ -18,7 +17,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <fgd.showroom.CenterTitleToolbar
-            android:id="@+id/toolbar_action"
+            android:id="@+id/toolbar_step_pos"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
@@ -30,7 +29,7 @@
 
 
     <FrameLayout
-        android:id="@+id/frameLayout"
+        android:id="@+id/frameLayoutStepPos"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:clickable="true"
@@ -38,12 +37,12 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appBarLayout2"
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout3"
         tools:ignore="SpeakableTextPresentCheck">
 
         <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/debugFragment"
-            android:name="fgd.showroom.ui.debug.DebugFragment"
+            android:id="@+id/stepPosFragment"
+            android:name="fgd.showroom.ui.guide.GuideFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="25dp" />

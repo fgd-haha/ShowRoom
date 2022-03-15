@@ -42,35 +42,6 @@ class ActionActivity : AppCompatActivity() {
 
         this.action = StepAction(id, stepno, stepidx, devtype, actionno, devno, filename, intv)
         (supportFragmentManager.findFragmentById(R.id.debugFragment) as DebugFragment?)?.setData(this.action!!)
-
-
-//        binding.btnComputerPowerOn.setOnClickListener { viewModel.powerAllRequest() }
-//        binding.btnComputerPowerOff.setOnClickListener { viewModel.shutAllRequest() }
-//        observeCommonRpInfo(this, this, viewModel.actionResult)
-
-//        val layoutManager = GridLayoutManager(this, 1)
-//        binding.computerRecyclerView.layoutManager = layoutManager
-//        val adapter = ComputersAdapter(computerList)
-//        binding.computerRecyclerView.adapter = adapter
-//
-//        binding.computerRecyclerView.viewTreeObserver.addOnGlobalLayoutListener(
-//            object : OnGlobalLayoutListener {
-//                override fun onGlobalLayout() {
-//                    binding.computerRecyclerView.viewTreeObserver.removeOnGlobalLayoutListener(this)
-//                    val viewWidth: Int = binding.computerRecyclerView.measuredWidth
-//                    val cardViewWidth: Float = this@ComputersActivity.resources.getDimension(R.dimen.computer_view_width)
-//                    val newSpanCount = floor((viewWidth / cardViewWidth).toDouble()).toInt()
-//                    layoutManager.spanCount = newSpanCount
-//                    layoutManager.requestLayout()
-//                }
-//            })
-//
-//        viewModel.computersStatus.observe(this, { result ->
-//            computerList = result.getOrNull() ?: listOf()
-//            adapter.setComputerList(computerList)
-//            adapter.notifyDataSetChanged()
-//        })
-//        viewModel.monitorComputersStatus()
     }
 
 

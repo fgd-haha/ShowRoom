@@ -50,13 +50,6 @@ class SettingViewModel : ViewModel() {
         deleteStepLiveData.value = Step(stepno, "", 0, 0)
     }
 
-    fun modStepPos(stepno: Int, posx: Int, posy: Int) = Repository.modStepPos(stepno, posx, posy)
-
-    val saveWizardRp = Transformations.switchMap(saveWizardLiveData) { stepAction -> Repository.saveWizard(stepAction) }
-    fun saveWizard(stepAction: StepAction) {
-        saveWizardLiveData.value = stepAction
-    }
-
     val copystepRp = Transformations.switchMap(copystepLiveData) { l -> Repository.copystep(l[0], l[1]) }
     fun copystep(srcstep: Int, dststep: Int) {
         copystepLiveData.value = listOf<Int>(srcstep, dststep)
