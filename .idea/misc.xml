@@ -16,18 +16,19 @@
         <entry key="..\:/code/external/ShowroomApp/ShowRoom/app/src/main/res/layout/abs_layout.xml" value="0.18671875" />
         <entry key="..\:/code/external/ShowroomApp/ShowRoom/app/src/main/res/layout/action_dialog.xml" value="0.378125" />
         <entry key="..\:/code/external/ShowroomApp/ShowRoom/app/src/main/res/layout/action_item.xml" value="0.37421875" />
-        <entry key="..\:/code/external/ShowroomApp/ShowRoom/app/src/main/res/layout/activity_action.xml" value="0.23202614379084968" />
+        <entry key="..\:/code/external/ShowroomApp/ShowRoom/app/src/main/res/layout/activity_action.xml" value="0.1" />
         <entry key="..\:/code/external/ShowroomApp/ShowRoom/app/src/main/res/layout/activity_computers.xml" value="0.35875" />
         <entry key="..\:/code/external/ShowroomApp/ShowRoom/app/src/main/res/layout/activity_main.xml" value="0.37421875" />
         <entry key="..\:/code/external/ShowroomApp/ShowRoom/app/src/main/res/layout/activity_main2.xml" value="0.1" />
         <entry key="..\:/code/external/ShowroomApp/ShowRoom/app/src/main/res/layout/activity_step_pos.xml" value="0.37421875" />
+        <entry key="..\:/code/external/ShowroomApp/ShowRoom/app/src/main/res/layout/add_step_dialog.xml" value="0.5725" />
         <entry key="..\:/code/external/ShowroomApp/ShowRoom/app/src/main/res/layout/content_main.xml" value="0.35875" />
         <entry key="..\:/code/external/ShowroomApp/ShowRoom/app/src/main/res/layout/copy_step_dialog.xml" value="0.1546875" />
         <entry key="..\:/code/external/ShowroomApp/ShowRoom/app/src/main/res/layout/fragment_debug.xml" value="0.1796875" />
         <entry key="..\:/code/external/ShowroomApp/ShowRoom/app/src/main/res/layout/fragment_first.xml" value="0.4" />
         <entry key="..\:/code/external/ShowroomApp/ShowRoom/app/src/main/res/layout/fragment_guide.xml" value="0.12447916666666667" />
         <entry key="..\:/code/external/ShowroomApp/ShowRoom/app/src/main/res/layout/fragment_setting.xml" value="0.4" />
-        <entry key="..\:/code/external/ShowroomApp/ShowRoom/app/src/main/res/layout/fragment_status.xml" value="0.1" />
+        <entry key="..\:/code/external/ShowroomApp/ShowRoom/app/src/main/res/layout/fragment_status.xml" value="0.490625" />
         <entry key="..\:/code/external/ShowroomApp/ShowRoom/app/src/main/res/layout/step_input_dialog.xml" value="0.46875" />
         <entry key="..\:/code/external/ShowroomApp/ShowRoom/app/src/main/res/layout/step_item.xml" value="0.37421875" />
         <entry key="..\:/code/external/ShowroomApp/ShowRoom/app/src/main/res/layout/text_input_server_setting.xml" value="0.19140625" />

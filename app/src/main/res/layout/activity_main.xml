@@ -29,7 +29,7 @@
                 android:layout_height="?attr/actionBarSize"
                 android:layout_gravity="right"
                 android:text="@string/btn_all_light_off"
-                app:icon="@drawable/ic_baseline_alt_route_24"
+                app:icon="@drawable/ic_baseline_highlight_off_24"
                 tools:ignore="RtlHardcoded" />
 
             <Button
@@ -38,7 +38,7 @@
                 android:layout_height="?attr/actionBarSize"
                 android:layout_gravity="right"
                 android:text="@string/btn_all_light_on"
-                app:icon="@drawable/ic_baseline_alt_route_24"
+                app:icon="@drawable/ic_baseline_highlight_24"
                 tools:ignore="RtlHardcoded" />
 
         </fgd.showroom.CenterTitleToolbar>

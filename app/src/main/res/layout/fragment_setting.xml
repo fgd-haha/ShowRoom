@@ -90,7 +90,7 @@
         android:layout_height="wrap_content"
         android:text="@string/setting_add_step"
         style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
-        app:icon="@drawable/ic_baseline_alt_route_24"
+        app:icon="@drawable/ic_baseline_playlist_add_24"
         app:layout_constraintBottom_toTopOf="@+id/guideline14"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline9" />
@@ -101,7 +101,7 @@
         android:layout_height="wrap_content"
         android:text="@string/setting_step_pos"
         style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
-        app:icon="@drawable/ic_baseline_alt_route_24"
+        app:icon="@drawable/ic_baseline_edit_note_24"
         app:layout_constraintBottom_toTopOf="@+id/guideline15"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline9" />
@@ -112,7 +112,7 @@
         android:layout_height="wrap_content"
         android:text="@string/setting_add_action"
         style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
-        app:icon="@drawable/ic_baseline_alt_route_24"
+        app:icon="@drawable/ic_baseline_playlist_add_24"
         app:layout_constraintBottom_toTopOf="@+id/guideline12"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline9" />
@@ -123,7 +123,7 @@
         android:layout_height="wrap_content"
         android:text="@string/setting_clone_action"
         style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
-        app:icon="@drawable/ic_baseline_alt_route_24"
+        app:icon="@drawable/ic_baseline_file_copy_24"
         app:layout_constraintBottom_toTopOf="@+id/guideline13"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline9" />

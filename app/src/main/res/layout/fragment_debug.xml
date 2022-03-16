@@ -109,7 +109,7 @@
         android:layout_height="70dp"
         android:layout_marginStart="10dp"
         android:text="@string/debug_execute"
-        app:icon="@drawable/ic_baseline_alt_route_24"
+        app:icon="@drawable/ic_baseline_double_arrow_24"
         app:layout_constraintBottom_toTopOf="@+id/guideline5"
         app:layout_constraintStart_toStartOf="@+id/guideline7" />
 
@@ -168,7 +168,7 @@
         android:layout_marginBottom="50dp"
         android:text="@string/debug_save"
         app:cornerRadius="10dp"
-        app:icon="@drawable/ic_baseline_alt_route_24"
+        app:icon="@drawable/ic_baseline_save_24"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
