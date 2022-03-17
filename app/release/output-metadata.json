@@ -1,0 +1,20 @@
+{
+  "version": 3,
+  "artifactType": {
+    "type": "APK",
+    "kind": "Directory"
+  },
+  "applicationId": "fgd.showroom",
+  "variantName": "release",
+  "elements": [
+    {
+      "type": "SINGLE",
+      "filters": [],
+      "attributes": [],
+      "versionCode": 1,
+      "versionName": "0.1",
+      "outputFile": "ShowRoom_release_v0.1_2022_03_17_14_38_25.apk"
+    }
+  ],
+  "elementType": "File"
+}

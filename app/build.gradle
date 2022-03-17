@@ -1,6 +1,16 @@
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+}
+
+static def nowTime(){
+    def current = LocalDateTime.now()
+    def formatter = DateTimeFormatter.ofPattern("yyyy_MM_dd_HH_mm_ss")
+    def formatted = current.format(formatter)
+    return formatted
 }
 
 android {
@@ -11,7 +21,7 @@ android {
         minSdk 24
         targetSdk 31
         versionCode 1
-        versionName "1.0"
+        versionName "0.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -31,6 +41,13 @@ android {
     }
     buildFeatures {
         viewBinding true
+    }
+
+    android.applicationVariants.all { variant ->
+        variant.outputs.all {
+            outputFileName = "ShowRoom_${buildType.name}_v${versionName}_${nowTime()}.apk"
+        }
+
     }
 }
 
